@@ -17,6 +17,7 @@ DISCORD_TOKEN="TOKEN"
 ```
 ---
 ## Usage
+Run this command in your terminal to run the project
 ```
 (venv)$ python src/main.py
 ```

@@ -10,7 +10,7 @@ def main():
     bot = commands.Bot(command_prefix=prefix, intents=intents, description="hola, soy el Dolar Bot")
 
     # commands and events
-    @bot.command(name="saludar",help="el bot te saludara")
+    @bot.command(name="saludar",help="el bot te saludará")
     async def saludar(ctx):
         await ctx.reply(f"hola {ctx.author}, soy el DolarBot")
     

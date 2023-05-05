@@ -12,7 +12,7 @@ def main():
     # commands and events
     @bot.command(name="saludar",help="el bot te saludará")
     async def saludar(ctx):
-        await ctx.reply(f"hola {ctx.author}, soy el DolarBot")
+        await ctx.reply(f"hola {ctx.author}, en que puedo ayudarte")
     
     bot.run(token)
 

@@ -13,7 +13,7 @@ $ pipenv shell
 ```
 To run the app you will have set the **DISCORD_TOKEN** environmental variable into the *.env* file
 ```
-DISCORD_TOKEN="MTEwNDEyNTA2NzMyMDg4NTM5OA.GHDt-X.yvV643aUIz9Y0vzrkQYhpaU279TmFauiwXakV8"
+DISCORD_TOKEN="TOKEN"
 ```
 ---
 ## Usage

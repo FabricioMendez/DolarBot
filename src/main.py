@@ -1,5 +1,4 @@
-import os, json
-import discord
+import os, discord
 from dotenv import load_dotenv
 from discord.ext import commands
 def main():

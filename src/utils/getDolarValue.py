@@ -1,7 +1,9 @@
-# 
-
 import requests
+def getDolarValue():
+    url = "https://api.bluelytics.com.ar/v2/latest"
+    response = requests.get(url).json()
+    
+    return response
 
-response = requests.get('https://api.bluelytics.com.ar/v2/latest?callback=cotizacion')
-print(response.status_code)  # 200 si la petición fue exitosa
-print(response.json())  # contenido de la respuesta en formato JSON
+
+print(getDolarValue())

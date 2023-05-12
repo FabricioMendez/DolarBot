@@ -7,12 +7,16 @@ def main():
     token = os.getenv("DISCORD_TOKEN")
     intents = discord.Intents.all()
     bot = commands.Bot(command_prefix=prefix, intents=intents, description="hola, soy el Dolar Bot")
-
+    
     # commands and events
-    @bot.command(name="saludar",help="el bot te saludará")
+    @bot.command(name="saludar", help="el bot te saludará")
     async def saludar(ctx):
         await ctx.reply(f"hola {ctx.author}, en que puedo ayudarte")
     
+    @bot.command(name="dolarhoy", help="cotizacion de dolar ...")
+    async def dolarhoy(ctx):
+        await ctx.reply(f"el dolar esta a 478")
+
     bot.run(token)
 
 if __name__ == "__main__":

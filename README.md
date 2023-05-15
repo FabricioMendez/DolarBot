@@ -1,5 +1,5 @@
-# DolarBot
-## Summarize
+# *DolarBot*
+## **Summarize**
 Our Project is going to be a bot that you will be able to use on any discord server, it will be informing you about the live price of the dollar blue and the official dollar, with various commands the bot will give you will be responding at the moment depending on the command used
 
 
@@ -17,8 +17,20 @@ DISCORD_TOKEN="TOKEN"
 ---
 ## Add the bot to your server
 
-## Usage
+## **Usage**
 Run this command in your terminal to run the project 
 ```
 (venv)$ python src/main.py
 ```
+
+---
+
+## **Resources**
+
+
+---
+
+## **Developers**
+- Ferreyra 
+- Mendez
+- Puig

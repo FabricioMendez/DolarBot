@@ -5,7 +5,7 @@ Hablar de que se trata el bot, y que problematica viene a resolver
 ---
 ## Installation and set up (Linux, MacOS)
 To install all the packages you will need run the followings commands in you terminal
->you need *pipenv* and *pyenv* to install and run the app
+>you need [pipenv](https://gist.github.com/planetceres/8adb62494717c71e93c96d8adad26f5c) and *pyenv* to install and run the app
 ```
 $ pipenv --python 3.10
 $ pipenv shell

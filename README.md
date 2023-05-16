@@ -1,10 +1,11 @@
 # *DolarBot*
 
-- [*Summarize*](#summarize)
-- [*Intallation*](#installation-and-set-up-linux-macos)
-- [*Usage*](#usage)
-- [*Resources*](#resources)
-- [*Developers*](#developers)
+- [*DolarBot*](#dolarbot)
+  - [**Summarize**](#summarize)
+  - [**Installation and set up (Linux, MacOS)**](#installation-and-set-up-linux-macos)
+  - [**Usage**](#usage)
+  - [**Resources**](#resources)
+  - [**Developers**](#developers)
 ## **Summarize**
 Our Project is going to be a bot that you will be able to use on any discord server, it will be informing you about the live price of the dollar blue and the official dollar, with various commands the bot will give you will be responding at the moment depending on the command used
 
@@ -16,13 +17,8 @@ To install all the packages you will need run the followings commands in you ter
 ```
 $ pipenv install
 ```
-To run the app you will have set the **DISCORD_TOKEN** environmental variable into the *.env* file
-```
-DISCORD_TOKEN="TOKEN"
-```
----
-## Add the bot to your server
 
+---
 ## **Usage**
 Run this command in your terminal to run the project 
 ```

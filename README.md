@@ -13,7 +13,7 @@ Our Project is going to be a bot that you will be able to use on any discord ser
 ---
 ## **Installation and set up (Linux, MacOS)**
 To install all the packages you will need run the followings commands in you terminal
->you need [pipenv](https://gist.github.com/planetceres/8adb62494717c71e93c96d8adad26f5c) and [pyenv](https://ubunlog.com/en/pyenv-instala-multiples-versiones-de-python-en-tu-sistema/) to install and run the app
+>you need [`pipenv`](https://gist.github.com/planetceres/8adb62494717c71e93c96d8adad26f5c) and [`pyenv`](https://ubunlog.com/en/pyenv-instala-multiples-versiones-de-python-en-tu-sistema/) to install and run the app
 ```
 $ pipenv install
 ```

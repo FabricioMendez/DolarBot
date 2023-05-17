@@ -1,24 +1,24 @@
 import os, discord
-from discord.ext import commands
-from utils import getDolarValue, getConfig
+from discord.ext.commands import Context, Bot
+from utils.func import *
 def main():
     
     config = getConfig()
     prefix = config["prefix"]
-    application_id = config["application_id"]
     token = config["token"]
     
     intents = discord.Intents.all()
-    bot = commands.Bot(command_prefix=prefix, intents=intents, description="hola, soy el Dolar Bot")
-    
-     
+    bot = Bot(command_prefix=prefix, intents=intents, description="hola, soy el Dolar Bot")
+
+
     @bot.command(name="saludar", help="el bot te saludará")
-    async def saludar(ctx):
+    async def saludar(ctx: Context):
         await ctx.reply(f"hola {ctx.author}, en que puedo ayudarte")
     
-    @bot.command(name="dolarhoy", help="cotizacion de dolar ...")
-    async def dolarhoy(ctx):
-        await ctx.reply(f"el dolar esta a 478")
+    
+    @bot.command(name="greet", help="this command will greet")
+    async def greet(ctx: Context, name):
+        await ctx.send(f"hola {name}")
 
     bot.run(token)
 

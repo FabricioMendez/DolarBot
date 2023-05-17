@@ -11,7 +11,6 @@ def main():
     intents = discord.Intents.all()
     bot = commands.Bot(command_prefix=prefix, intents=intents, description="hola, soy el Dolar Bot")
     
-    # commands and events
      
     @bot.command(name="saludar", help="el bot te saludará")
     async def saludar(ctx):

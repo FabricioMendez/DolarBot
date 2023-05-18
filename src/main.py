@@ -4,6 +4,7 @@ from utils.func import *
 def main():
     
     config = getConfig()
+    
     prefix = config["prefix"]
     token = config["token"]
     

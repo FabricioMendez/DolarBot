@@ -21,6 +21,16 @@ def main():
     async def greet(ctx: Context, name):
         await ctx.send(f"hola {name}")
 
+    @bot.command(name="dolar", help="el bot te va a dar informacion sobre el dolar")
+    async def dolar(ctx: Context, moneda, compraOventa):
+        await ctx.send(f"El valor del dolar esta a {getDolarValue(moneda, compraOventa)}")
+    
+
+    @bot.command(name="euro", help="el bot te va a dar informacion sobre el euro")
+    async def euro(ctx: Context, moneda, compraOventa):
+        await ctx.send(f"El valor del euro esta a {getDolarValue(moneda, compraOventa)}")
+    
+
     bot.run(token)
 
 if __name__ == "__main__":

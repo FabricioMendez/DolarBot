@@ -13,7 +13,7 @@ Our Project is going to be a bot that you will be able to use on any discord ser
 ---
 
 ## How to download it
-- Clone/Download the repository
+- Clone/Download the repository [here](https://github.com/)
 - Create discord bot [here](https://discord.com/developers/applications)
 - Get your token
 - Invite your bot on servers using the following invite: https://discord.com/oauth2/authorize?&client_id=YOUR_APPLICATION_ID_HERE&scope=bot+applications.commands (Replace `YOUR_APPLICATION_ID_HERE` with your aplication id given that can be get at the bottom of this page: https://discord.com/developers/applications/YOUR_APPLICATION_ID_HERE/bot)
@@ -36,6 +36,12 @@ After that you can it with
 ```
 (venv)$ python src/main.py
 ```
+---
+
+## Resources
+- Discord.py
+- Request
+
 ---
 ## Developers
 - [Ferreyra](https://github.com/Ferchovich)

@@ -1,5 +1,6 @@
 import os, discord
 from discord.ext.commands import Context, Bot
+from datetime import datetime
 from utils.func import *
 def main():
     
@@ -15,22 +16,22 @@ def main():
     @bot.command(name="saludar", help="el bot te saludará")
     async def saludar(ctx: Context):
         await ctx.reply(f"hola {ctx.author}, en que puedo ayudarte")
-    
-    
-    @bot.command(name="greet", help="this command will greet")
-    async def greet(ctx: Context, name):
-        await ctx.send(f"hola {name}")
 
-    @bot.command(name="dolar", help="el bot te va a dar informacion sobre el dolar")
-    async def dolar(ctx: Context, moneda, compraOventa):
-        await ctx.send(f"El valor del dolar esta a {getDolarValue(moneda, compraOventa)}")
-    
+    @bot.command(name="dólar", help="")
+    async def dolar(ctx: Context):
+        date = datetime.now().strftime("%d/%m/%y %H:%M:%S")
+        respuesta = CreateResponde(title=f"Cotizacion dolar", post_content=f"Ultima actualización: {date}")
+        respuesta.configureEmbed()
 
-    @bot.command(name="euro", help="el bot te va a dar informacion sobre el euro")
-    async def euro(ctx: Context, moneda, compraOventa):
-        await ctx.send(f"El valor del euro esta a {getDolarValue(moneda, compraOventa)}")
-    
+        await ctx.reply(embed = respuesta.send)
+        
+    @bot.command(name="euro", help="")
+    async def euro(ctx: Context):
+        date = datetime.now().strftime("%d/%m/%y %H:%M:%S")
+        respuesta = CreateResponde(title=f"Cotizacion euro", post_content=f"Ultima actualización: {date}")
+        respuesta.configureEmbed()
 
+        await ctx.reply(embed = respuesta.send)
     bot.run(token)
 
 if __name__ == "__main__":

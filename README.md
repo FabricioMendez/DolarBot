@@ -44,6 +44,7 @@ After that you can it with
 
 ---
 ## Developers
+App made by: 
 - [Ferreyra](https://github.com/Ferchovich)
 - [Mendez](https://github.com/FabricioMendez)
 - [Puig](https://github.com/HermesPuig)

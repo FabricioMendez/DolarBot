@@ -20,7 +20,7 @@ Our Project is going to be a bot that you will be able to use on any discord ser
 
 ---
 ## How to start
-To start the bot you simply need to launch, either your terminal (Linux, Mac & Windows), or your Command Prompt ( Windows)
+To start the bot you simply need to launch, either your terminal (Linux, Mac & Windows), or your Command Prompt (Windows)
 
 Before running the bot you will need to install all the requirements for this project installed listed in the Pipfile
 >you need [`pipenv`](https://gist.github.com/planetceres/8adb62494717c71e93c96d8adad26f5c) and [`pyenv`](https://ubunlog.com/en/pyenv-instala-multiples-versiones-de-python-en-tu-sistema/) to install and run the app

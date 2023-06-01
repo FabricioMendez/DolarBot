@@ -9,8 +9,7 @@ def getCurrency(moneda:str, compraOVenta:str) -> str:
 
 def getCurrencyByDay(moneda:str, date_str:str):
     date_formatted = datetime.strptime(date_str, "%Y-%m-%d").date()
-    response = requests.get("https://api.bluelytics.com.ar/v2/evolution.json?days=30").json()
-    print(moneda.capitalize())
+    response = requests.get("https://api.bluelytics.com.ar/v2/evolution.json").json()
     for dic in response:
         date = datetime.strptime(dic["date"], "%Y-%m-%d").date()
         if dic["source"] == moneda.capitalize() and date == date_formatted:
@@ -46,11 +45,12 @@ class CustomHelpCommand(commands.HelpCommand):
         self.bot = bot
 
     async def send_bot_help(self, mapping):
+        prefix = self.bot.command_prefix
         bot_commands = await self.filter_commands(self.bot.commands, sort=True)
         help_message = "Estos son los comandos disponibles\n"
         
         for command in bot_commands:
-            help_message += f"`!{command.name}`: {command.help}\n"
+            help_message += f"`{prefix}{command.name}`: {command.help}\n"
 
         await self.get_destination().send(help_message)
 

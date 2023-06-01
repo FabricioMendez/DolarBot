@@ -10,20 +10,30 @@ def main():
     intents = discord.Intents.all()
     
     bot = Bot(command_prefix=prefix, intents=intents, description="hola, soy el Dolar Bot")
-    
+     
+
+
     @bot.event
     async def on_ready():
         print("The bot is ready")   
 
     @bot.event
     async def on_command_error(ctx: Context, error):
+        command_string = ""
+        for command in bot.commands:
+            command_string += f"- `{bot.command_prefix}{command.name}`: {command.help}\n"
+       
         if isinstance(error, commands.CommandNotFound):
-            response = CreateResponse(title="Comando no encontrado", post_content="Ingrese `!help` para información de los comandos")
+            response = CreateResponse(title="Comando no encontrado", post_content="")
+            data = {"Opciones": command_string}
+            response.createFields(data)
             await ctx.reply(embed = response.send)
 
         elif isinstance(error, commands.MissingRequiredArgument):
             response = CreateResponse(title="Ese parámetro no existe!", post_content="Tienes que ingresar un parametro válido")
-            data = {"**Opciones**": "- `!dolar hoy`\n- `!dolar reciente`\n- `!euro hoy`\n- `!euro reciente`"}
+            prefix = bot.command_prefix
+            data = {"**Opciones**": f"- `{prefix}dolar hoy`\n- `{prefix}dolar dia 'fecha' 'oficial o blue'`\n\tej: `{prefix}dolar dia 2023-05-29 oficial`"}
+
             response.createFields(data)
             
             await ctx.reply(embed = response.send)
@@ -51,8 +61,11 @@ def main():
                 await ctx.reply(embed = respuesta.send)
             elif param == "dia" and date_str and moneda:
                 moneda_seleccionada = getCurrencyByDay(moneda, date_str)
-                response = CreateResponse(title=f"Cotización  del dólar {moneda} encontrada del día {date_str}", post_content="")
-                
+                date = datetime.strptime(date_str, "%Y-%m-%d")
+                formatted_date = date.strftime("%d de %B de %Y")
+                response = CreateResponse(title=f"Cotización del dólar {moneda}", post_content=formatted_date)
+                data = {"Valor Venta": moneda_seleccionada["value_sell"], "Valor Compra": moneda_seleccionada["value_buy"]}
+                response.createFields(data)
                 await ctx.reply(embed  = response.send)
             
                    

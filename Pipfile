@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 discord = "*"
 requests = "*"
-asyncio = "*"
 
 [dev-packages]
 

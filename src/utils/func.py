@@ -1,24 +1,21 @@
 import requests, json
 from datetime import datetime
 from discord import Embed
+from discord.ext import commands
 def getCurrency(moneda:str, compraOVenta:str) -> str:
     url = "https://api.bluelytics.com.ar/v2/latest"
     response = requests.get(url).json()
     return f"${response[moneda][compraOVenta]}"
 
-def filterDicts(dictsToFilter:list):
-    filtered_dicts = list()
-    for dic in dictsToFilter:
-        newDic = {"date", dic["date"]}
-        filtered_dicts.append(newDic)
-    return filtered_dicts
-
 def getCurrencyByDay(moneda:str, date_str:str):
-    date = datetime.strptime("%Y-%m-%d").date()
-    evolucion_url = "https://api.bluelytics.com.ar/v2/evolution.json?days=30"
-    response = requests.get(evolucion_url).json()
-    filtered = filterDicts(response)
-    return filtered
+    date_formatted = datetime.strptime(date_str, "%Y-%m-%d").date()
+    response = requests.get("https://api.bluelytics.com.ar/v2/evolution.json?days=30").json()
+    print(moneda.capitalize())
+    for dic in response:
+        date = datetime.strptime(dic["date"], "%Y-%m-%d").date()
+        if dic["source"] == moneda.capitalize() and date == date_formatted:
+            return dic
+
 
 def getConfig() -> dict:
     with open("./src/utils/config.json") as f:
@@ -27,11 +24,12 @@ def getConfig() -> dict:
 
 
 
-class CreateResponde:
-    def __init__(self, title, post_content):
+class CreateResponse:
+    def __init__(self, title, post_content, color = int("3377FF", 16)):
         self.title = title
         self.content = post_content
-        self.response = Embed(title=self.title, description=self.content, colour=int("3377FF", 16))
+        self.response = Embed(title=self.title, description=self.content, colour=color)
+
     @property
     def send(self):
         return self.response
@@ -42,4 +40,17 @@ class CreateResponde:
             self.response.add_field(name=name, value=value, inline=False)
         self.response.set_footer(text="Fuente: https://www.valordolarblue.com.ar", icon_url="https://i.imgur.com/0FOvHM4.png")
     
+class CustomHelpCommand(commands.HelpCommand):
+    def __init__(self, bot):
+        super().__init__()
+        self.bot = bot
+
+    async def send_bot_help(self, mapping):
+        bot_commands = await self.filter_commands(self.bot.commands, sort=True)
+        help_message = "Estos son los comandos disponibles\n"
+        
+        for command in bot_commands:
+            help_message += f"`!{command.name}`: {command.help}\n"
+
+        await self.get_destination().send(help_message)
 

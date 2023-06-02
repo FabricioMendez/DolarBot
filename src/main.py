@@ -18,6 +18,17 @@ def main():
         print("The bot is ready")   
 
     @bot.event
+    async def on_typing(channel, user, when):
+        
+        print(f"{when}:{user.name} esta escribiendo en el canal '{channel.name}'")
+
+    @bot.event
+    async def on_guild_join(guild):
+        channel = guild.system_channel
+        if channel and channel.permissions_for(guild.me).send_messages:
+            await channel.send('¡Hola a todos! ¡Acabo de unirme a este servidor!')
+
+    @bot.event
     async def on_command_error(ctx: Context, error):
         command_string = ""
         for command in bot.commands:
@@ -52,22 +63,33 @@ def main():
 
             if param not in ALLOWED_PARAMS:
                 response = CreateResponse(title="Error!", post_content="Ese comando no existe", color=int("fd0204", 16))
-                await ctx.reply(embed = response.send)
+                await ctx.send(embed = response.send)
             elif param == "hoy":
                 date = datetime.now().strftime("%d/%m/%y %H:%M:%S")
                 respuesta = CreateResponse(title="Cotizacion dólar", post_content=f"Ultima actualización: {date}")
                 data = {"Oficial": getCurrency("oficial", "value_avg"), "Blue": getCurrency("blue", "value_avg")}
                 respuesta.createFields(data)
-                await ctx.reply(embed = respuesta.send)
+                await ctx.send(embed = respuesta.send)
             elif param == "dia" and date_str and moneda:
                 moneda_seleccionada = getCurrencyByDay(moneda, date_str)
-                date = datetime.strptime(date_str, "%Y-%m-%d")
-                formatted_date = date.strftime("%d de %B de %Y")
-                response = CreateResponse(title=f"Cotización del dólar {moneda}", post_content=formatted_date)
-                data = {"Valor Venta": moneda_seleccionada["value_sell"], "Valor Compra": moneda_seleccionada["value_buy"]}
-                response.createFields(data)
-                await ctx.reply(embed  = response.send)
-            
+                if moneda_seleccionada:
+                    date = datetime.strptime(date_str, "%Y-%m-%d")
+                    formatted_date = date.strftime("%d de %B de %Y")
+                    response = CreateResponse(title=f"Cotización del dólar {moneda}", post_content=formatted_date)
+                    data = {"Valor Venta": moneda_seleccionada["value_sell"], "Valor Compra": moneda_seleccionada["value_buy"]}
+                    response.createFields(data)
+                    await ctx.send(embed = response.send)
+                else:
+                    response = CreateResponse(title="Error!", post_content=f"No hay una cotizacion del dólar {moneda}", color=int("fd0204", 16))
+                    await ctx.send(embed = response.send)
+                    
+            elif param == "dia" and not date_str:
+                response = CreateResponse(title="Te falta una fecha en la que quieras saber el valor del dólar, ej:'2023-05-29'")
+                await ctx.send(embed = response.send)
+
+            elif param == "dia" and not moneda:
+                response = CreateResponse(title="Elige el tipo de divisa para el dólar, ej:'oficial o blue'")
+                await ctx.send(embed = response.send)
                    
     @bot.command(name="euro", help="Este comando proporcionará la cotizacion del euro oficial y el euro blue")
     async def euro(ctx: Context):
@@ -78,13 +100,6 @@ def main():
             respuesta.createFields(data)
             await ctx.reply(embed = respuesta.send)
             
-    @bot.command(name="ban", help="Comando para banear un usuario del servidor")
-    @commands.has_permissions(ban_members=True)
-    async def ban(ctx:Context, member: discord.Member):
-        await member.ban()
-        await ctx.send(f"{member.mention} ha sido baneado por {ctx.author.mention}")
-
-
     bot.help_command = CustomHelpCommand(bot)
     bot.run(token)
 

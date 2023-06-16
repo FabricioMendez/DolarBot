@@ -37,9 +37,8 @@ json = {
         }
     ]
 }
-# For authorization, you can use either your bot token
 headers = {
-    "Authorization": "Bot <my_bot_token>"
+    "Authorization": "Bot "
 }
 
 r = requests.post(url, headers=headers, json=json)

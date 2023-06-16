@@ -2,6 +2,7 @@ import requests, json
 from datetime import datetime
 from discord import Embed
 from discord.ext import commands
+
 def getCurrency(moneda:str, compraOVenta:str) -> str:
     url = "https://api.bluelytics.com.ar/v2/latest"
     response = requests.get(url).json()
@@ -14,11 +15,13 @@ def getCurrencyByDay(moneda:str, date_str:str):
         date = datetime.strptime(dic["date"], "%Y-%m-%d").date()
         if dic["source"] == moneda.capitalize() and date == date_formatted:
             return dic
+    return None
 
 
 def getConfig() -> dict:
     with open("./src/utils/config.json") as f:
         config = json.load(f)
+        
     return config
 
 
@@ -35,7 +38,9 @@ class CreateResponse:
     
     def createFields(self, data: dict) -> None:
         # {"Oficial": getCurrency("oficial", "value_avg"), ...}
+        
         for _, (name, value) in enumerate(data.items()):
+            
             self.response.add_field(name=name, value=value, inline=False)
         self.response.set_footer(text="Fuente: https://www.valordolarblue.com.ar", icon_url="https://i.imgur.com/0FOvHM4.png")
     

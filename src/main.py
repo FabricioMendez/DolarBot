@@ -3,6 +3,7 @@ from discord.ext import commands
 from discord.ext.commands import Context, Bot
 from datetime import datetime
 from utils.func import *
+
 def main():
     config = getConfig()
     prefix = config["prefix"]
@@ -11,22 +12,13 @@ def main():
     
     bot = Bot(command_prefix=prefix, intents=intents, description="hola, soy el Dolar Bot")
      
-
-
     @bot.event
     async def on_ready():
         print("The bot is ready")   
 
     @bot.event
     async def on_typing(channel, user, when):
-        
         print(f"{when}:{user.name} esta escribiendo en el canal '{channel.name}'")
-
-    @bot.event
-    async def on_guild_join(guild):
-        channel = guild.system_channel
-        if channel and channel.permissions_for(guild.me).send_messages:
-            await channel.send('¡Hola a todos! ¡Acabo de unirme a este servidor!')
 
     @bot.event
     async def on_command_error(ctx: Context, error):
@@ -50,9 +42,9 @@ def main():
             await ctx.reply(embed = response.send)
 
     @bot.command(name="saludo",help="Este comando te saludará")
-    async def saludo(ctx, nombre=None):
+    async def saludo(ctx, nombre: discord.Member=None):
         if nombre:
-            await ctx.send(f"Hola, {nombre}!")
+            await ctx.send(f"Hola, {nombre.mention}!")
         else:
             await ctx.send("¡Hola!")
 
